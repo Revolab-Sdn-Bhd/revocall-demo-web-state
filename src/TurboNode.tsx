@@ -7,9 +7,17 @@ export type TurboNodeData = {
   title: string;
   icon?: ReactNode;
   subline?: string;
+  nodeLR?: boolean;
+  nodeRL?: boolean;
+  nodeTB?: boolean;
+  nodeTL?: boolean;
+  nodeLB?: boolean;
+  nodeRB?: boolean;
+  nodeBR?: boolean;
+  nodeTR?: boolean;
 };
 
-export default memo(({ data }: NodeProps<Node<TurboNodeData>>) => {
+const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
   return (
     <>
       <div className="cloud gradient">
@@ -26,10 +34,58 @@ export default memo(({ data }: NodeProps<Node<TurboNodeData>>) => {
               {data.subline && <div className="subline">{data.subline}</div>}
             </div>
           </div>
-          <Handle type="target" position={Position.Left} />
-          <Handle type="source" position={Position.Right} />
+          {data.nodeLR && (
+            <div>
+              <Handle type="target" position={Position.Left} />
+              <Handle type="source" position={Position.Right} />
+            </div>
+          )}
+          {data.nodeRL && (
+            <div>
+              <Handle type="target" position={Position.Right} />
+              <Handle type="source" position={Position.Left} />
+            </div>
+          )}
+          {data.nodeTB && (
+            <div>
+              <Handle type="target" position={Position.Top} />
+              <Handle type="source" position={Position.Bottom} />
+            </div>
+          )}
+          {data.nodeTL && (
+            <div>
+              <Handle type="target" position={Position.Top} />
+              <Handle type="source" position={Position.Left} />
+            </div>
+          )}
+          {data.nodeLB && (
+            <div>
+              <Handle type="target" position={Position.Left} />
+              <Handle type="source" position={Position.Bottom} />
+            </div>
+          )}
+          {data.nodeRB && (
+            <div>
+              <Handle type="target" position={Position.Right} />
+              <Handle type="source" position={Position.Bottom} />
+            </div>
+          )}
+          {data.nodeBR && (
+            <div>
+              <Handle type="target" position={Position.Bottom} />
+              <Handle type="source" position={Position.Right} />
+            </div>
+          )}
+          {data.nodeTR && (
+            <div>
+              <Handle type="target" position={Position.Top} />
+              <Handle type="source" position={Position.Right} />
+            </div>
+          )}
         </div>
       </div>
     </>
   );
-});
+};
+
+export default memo(TurboNode);

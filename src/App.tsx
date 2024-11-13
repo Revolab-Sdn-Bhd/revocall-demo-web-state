@@ -19,58 +19,117 @@ import FunctionIcon from "./FunctionIcon.tsx";
 
 const initialNodes: Node<TurboNodeData>[] = [
   {
-    id: "1",
+    id: "0",
     position: { x: 0, y: 0 },
-    data: { icon: <FunctionIcon />, title: "readFile", subline: "api.ts" },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Call Initialized",
+      subline: "api.ts",
+      nodeLR: true,
+    },
+    type: "turbo",
+  },
+  {
+    id: "1",
+    position: { x: 300, y: 0 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "FAQ",
+      subline: "api.ts",
+      nodeLR: true,
+    },
     type: "turbo",
   },
   {
     id: "2",
-    position: { x: 250, y: 0 },
-    data: { icon: <FunctionIcon />, title: "bundle", subline: "apiContents" },
+    position: { x: 550, y: 0 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Requesting Card Registration",
+      subline: "apiContents",
+      nodeLR: true,
+    },
     type: "turbo",
   },
   {
     id: "3",
-    position: { x: 0, y: 250 },
-    data: { icon: <FunctionIcon />, title: "readFile", subline: "sdk.ts" },
+    position: { x: 950, y: 0 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Request Name",
+      subline: "sdk.ts",
+      nodeLB: true,
+    },
     type: "turbo",
   },
   {
     id: "4",
-    position: { x: 250, y: 250 },
-    data: { icon: <FunctionIcon />, title: "bundle", subline: "sdkContents" },
+    position: { x: 0, y: 150 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Request IC No.",
+      subline: "sdkContents",
+      nodeTR: true,
+    },
     type: "turbo",
   },
   {
     id: "5",
-    position: { x: 500, y: 125 },
-    data: { icon: <FunctionIcon />, title: "concat", subline: "api, sdk" },
+    position: { x: 250, y: 150 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Request Employment Status",
+      subline: "api, sdk",
+      nodeLR: true,
+    },
     type: "turbo",
   },
   {
     id: "6",
-    position: { x: 750, y: 125 },
-    data: { icon: <FiFile />, title: "fullBundle" },
+    position: { x: 650, y: 150 },
+    data: { icon: <FiFile />, title: "Request Annual Income", nodeLB: true },
+    type: "turbo",
+  },
+  {
+    id: "7",
+    position: { x: 0, y: 300 },
+    data: { icon: <FiFile />, title: "Confirming Application", nodeTR: true },
+    type: "turbo",
+  },
+  {
+    id: "8",
+    position: { x: 400, y: 300 },
+    data: { icon: <FiFile />, title: "Application Submitted", nodeLR: true },
+    type: "turbo",
+  },
+  {
+    id: "9",
+    position: { x: 750, y: 300 },
+    data: { icon: <FiFile />, title: "Call Ended", nodeLR: true },
     type: "turbo",
   },
 ];
 
 const initialEdges: Edge[] = [
   {
+    id: "e0-1",
+    source: "0",
+    target: "1",
+  },
+  {
     id: "e1-2",
     source: "1",
     target: "2",
   },
   {
+    id: "e2-3",
+    source: "2",
+    target: "3",
+  },
+  {
     id: "e3-4",
     source: "3",
     target: "4",
-  },
-  {
-    id: "e2-5",
-    source: "2",
-    target: "5",
   },
   {
     id: "e4-5",
@@ -81,6 +140,21 @@ const initialEdges: Edge[] = [
     id: "e5-6",
     source: "5",
     target: "6",
+  },
+  {
+    id: "e6-7",
+    source: "6",
+    target: "7",
+  },
+  {
+    id: "e7-8",
+    source: "7",
+    target: "8",
+  },
+  {
+    id: "e8-9",
+    source: "8",
+    target: "9",
   },
 ];
 
@@ -108,12 +182,12 @@ const Flow = () => {
 
   return (
     <ReactFlow
+      fitView
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      fitView
       nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
       defaultEdgeOptions={defaultEdgeOptions}
