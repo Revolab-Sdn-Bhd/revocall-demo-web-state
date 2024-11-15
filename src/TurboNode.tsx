@@ -4,8 +4,9 @@ import { FiCloud } from "react-icons/fi";
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 
 export type TurboNodeData = {
-  title: string;
+  title?: string;
   icon?: ReactNode;
+  label?: string;
   subline?: string;
   nodeLR?: boolean;
   nodeRL?: boolean;
@@ -18,6 +19,8 @@ export type TurboNodeData = {
 };
 
 const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
+  const minWidthStyle = { minWidth: "300px" }; // Set your desired minimum width
+
   return (
     <>
       <div className="cloud gradient">
@@ -25,7 +28,7 @@ const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
           <FiCloud />
         </div>
       </div>
-      <div className="wrapper gradient">
+      <div className="wrapper gradient" style={minWidthStyle}>
         <div className="inner">
           <div className="body">
             {data.icon && <div className="icon">{data.icon}</div>}

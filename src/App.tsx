@@ -16,6 +16,7 @@ import "@xyflow/react/dist/base.css";
 import TurboNode, { type TurboNodeData } from "./TurboNode.tsx";
 import TurboEdge from "./TurboEdge.tsx";
 import FunctionIcon from "./FunctionIcon.tsx";
+import { LabeledGroupNode } from "./components/labeled-group-node";
 
 const initialNodes: Node<TurboNodeData>[] = [
   {
@@ -31,80 +32,102 @@ const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "1",
-    position: { x: 300, y: 0 },
+    position: { x: 500, y: 0 },
     data: {
       icon: <FunctionIcon />,
       title: "FAQ",
       subline: "api.ts",
-      nodeLR: true,
-    },
-    type: "turbo",
-  },
-  {
-    id: "2",
-    position: { x: 550, y: 0 },
-    data: {
-      icon: <FunctionIcon />,
-      title: "Requesting Card Registration",
-      subline: "apiContents",
-      nodeLR: true,
-    },
-    type: "turbo",
-  },
-  {
-    id: "3",
-    position: { x: 950, y: 0 },
-    data: {
-      icon: <FunctionIcon />,
-      title: "Request Name",
-      subline: "sdk.ts",
       nodeLB: true,
     },
     type: "turbo",
   },
   {
+    id: "group_1",
+    position: { x: 200, y: 100 },
+    data: { label: "Card Registration" },
+    width: 500,
+    height: 800,
+    type: "group",
+  },
+  {
+    id: "2",
+    position: { x: 100, y: 50 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Requesting Card Registration",
+      subline: "apiContents",
+      nodeTB: true,
+    },
+    type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
+  },
+  {
+    id: "3",
+    position: { x: 100, y: 150 },
+    data: {
+      icon: <FunctionIcon />,
+      title: "Request Name",
+      subline: "sdk.ts",
+      nodeTB: true,
+    },
+    type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
+  },
+  {
     id: "4",
-    position: { x: 0, y: 150 },
+    position: { x: 100, y: 250 },
     data: {
       icon: <FunctionIcon />,
       title: "Request IC No.",
       subline: "sdkContents",
-      nodeTR: true,
+      nodeTB: true,
     },
     type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
   },
   {
     id: "5",
-    position: { x: 250, y: 150 },
+    position: { x: 100, y: 350 },
     data: {
       icon: <FunctionIcon />,
       title: "Request Employment Status",
       subline: "api, sdk",
-      nodeLR: true,
+      nodeTB: true,
     },
     type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
   },
   {
     id: "6",
-    position: { x: 650, y: 150 },
-    data: { icon: <FiFile />, title: "Request Annual Income", nodeLB: true },
+    position: { x: 100, y: 450 },
+    data: { icon: <FiFile />, title: "Request Annual Income", nodeTB: true },
     type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
   },
   {
     id: "7",
-    position: { x: 0, y: 300 },
-    data: { icon: <FiFile />, title: "Confirming Application", nodeTR: true },
+    position: { x: 100, y: 550 },
+    data: { icon: <FiFile />, title: "Confirming Application", nodeTB: true },
     type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
   },
   {
     id: "8",
-    position: { x: 400, y: 300 },
-    data: { icon: <FiFile />, title: "Application Submitted", nodeLR: true },
+    position: { x: 100, y: 650 },
+    data: { icon: <FiFile />, title: "Application Submitted", nodeTB: true },
     type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
   },
   {
     id: "9",
-    position: { x: 750, y: 300 },
+    position: { x: 750, y: 800 },
     data: { icon: <FiFile />, title: "Call Ended", nodeLR: true },
     type: "turbo",
   },
@@ -115,6 +138,12 @@ const initialEdges: Edge[] = [
     id: "e0-1",
     source: "0",
     target: "1",
+  },
+  {
+    id: "e0-2", // FAQ -> Call Ended
+    source: "0",
+    target: "2",
+    animated: true,
   },
   {
     id: "e1-2",
@@ -156,10 +185,17 @@ const initialEdges: Edge[] = [
     source: "8",
     target: "9",
   },
+  {
+    id: "e1-9", // FAQ -> Call Ended
+    source: "1",
+    target: "9",
+    animated: true,
+  },
 ];
 
 const nodeTypes = {
   turbo: TurboNode,
+  group: LabeledGroupNode,
 };
 
 const edgeTypes = {
