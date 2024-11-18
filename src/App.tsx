@@ -17,10 +17,15 @@ import {
 } from "./graph.tsx";
 import { type TurboNodeData } from "./TurboNode.tsx";
 import { useChannel, ChannelProvider } from "ably/react";
-
 import "@xyflow/react/dist/base.css";
+import { toast } from "sonner";
 
-const channelName = "test";
+const getChannelNameFromURL = () => {
+  const path = window.location.pathname;
+  return path.split("/")[1] || "default";
+};
+
+const channelName = getChannelNameFromURL();
 const completed = new Set<number>();
 
 // TODO:
@@ -31,17 +36,41 @@ const Flow = () => {
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const { channel } = useChannel(channelName, (event) => {
-    // Handle incoming conversations state messages
+    console.log(
+      `Received ${event.name} message from ${channel.name}:\n${JSON.stringify(
+        event.data
+      )}`
+    );
+
     if (event.name === "state") {
+      // Handle incoming conversations state messages
       const { event: type, data } = event.data;
       const [id, state] = type.split(" - ");
 
-      console.log(`Received state message: ${type} - ${JSON.stringify(data)}`);
-
+      console.log(`Processing state: ${id} - ${state}`);
       processState(id, data);
     }
 
     if (event.name === "process") {
+      const data: Record<string, boolean> = event.data.data;
+      const success: boolean = event.data.success;
+      const chunks: string[] = [];
+
+      for (const key in data) {
+        chunks.push(
+          `${key.split("_").join(" ")}: ${data[key] ? "success" : "failure"}`
+        );
+      }
+
+      if (success) {
+        toast.success(event.data.event, {
+          description: chunks.join("\n"),
+        });
+      } else {
+        toast.error(event.data.event, {
+          description: chunks.join("\n"),
+        });
+      }
     }
   });
 
@@ -84,11 +113,9 @@ const Flow = () => {
     completed.add(idx);
   };
 
-  const handleProcess = (id: string, data: Record<string, unknown>) => {}
-
   const onConnect: OnConnect = useCallback(
     (params) => setEdges((els) => addEdge(params, els)),
-    []
+    [setEdges]
   );
 
   const deepCloneNode = (node: Node<TurboNodeData>) => {

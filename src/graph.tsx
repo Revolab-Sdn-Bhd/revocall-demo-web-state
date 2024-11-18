@@ -10,6 +10,7 @@ import { TbLock } from "react-icons/tb";
 import { MdPermIdentity, MdCallEnd } from "react-icons/md";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { IoMdCloudUpload } from "react-icons/io";
+import { RiIndeterminateCircleFill } from "react-icons/ri";
 import TurboNode, { type TurboNodeData } from "./TurboNode.tsx";
 import TurboEdge from "./TurboEdge.tsx";
 import { LabeledGroupNode } from "./components/labeled-group-node";
@@ -42,12 +43,24 @@ export const initialNodes: Node<TurboNodeData>[] = [
     position: { x: 200, y: 100 },
     data: { label: "Card Loss Application" },
     width: 500,
-    height: 900,
+    height: 1000,
     type: "group",
   },
   {
-    id: "2",
+    id: "1a",
     position: { x: 100, y: 50 },
+    data: {
+      icon: <RiIndeterminateCircleFill />,
+      title: "Confirm Termination",
+      nodeTB: true,
+    },
+    type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
+  },
+  {
+    id: "2",
+    position: { x: 100, y: 150 },
     data: {
       icon: <MdPermIdentity />,
       title: "Collect IC Number",
@@ -60,7 +73,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "3",
-    position: { x: 100, y: 150 },
+    position: { x: 100, y: 250 },
     data: {
       icon: <FaBirthdayCake />,
       title: "Collect Date of Birth",
@@ -73,7 +86,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "4",
-    position: { x: 100, y: 250 },
+    position: { x: 100, y: 350 },
     data: {
       icon: <AiOutlineTransaction />,
       title: "Collect Last Transaction",
@@ -86,7 +99,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "5",
-    position: { x: 100, y: 350 },
+    position: { x: 100, y: 450 },
     data: {
       icon: <FaRegCreditCard />,
       title: "Confirm Lost Card",
@@ -98,7 +111,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "6",
-    position: { x: 100, y: 450 },
+    position: { x: 100, y: 550 },
     data: {
       icon: <TbLock />,
       title: "Confirm Block Card",
@@ -110,7 +123,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "7",
-    position: { x: 100, y: 550 },
+    position: { x: 100, y: 650 },
     data: {
       icon: <FiFile />,
       title: "New Card Registration",
@@ -122,7 +135,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "8",
-    position: { x: 100, y: 650 },
+    position: { x: 100, y: 750 },
     data: {
       icon: <MdPermIdentity />,
       title: "Collect Postal Code",
@@ -135,7 +148,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "9",
-    position: { x: 100, y: 750 },
+    position: { x: 100, y: 850 },
     data: {
       icon: <IoMdCloudUpload />,
       title: "Submit New Card",
@@ -147,7 +160,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "10",
-    position: { x: 750, y: 900 },
+    position: { x: 750, y: 1000 },
     data: {
       icon: <MdCallEnd />,
       title: "Call Ended",
@@ -164,14 +177,19 @@ export const initialEdges: Edge[] = [
     target: "1",
   },
   {
-    id: "e0-2", // FAQ -> Call Ended
+    id: "e0-1a", // Init -> Confirm Termination
     source: "0",
-    target: "2",
+    target: "1a",
     animated: true,
   },
   {
-    id: "e1-2",
+    id: "e1-1a",
     source: "1",
+    target: "1a",
+  },
+  {
+    id: "e1a-2",
+    source: "1a",
     target: "2",
   },
   {
