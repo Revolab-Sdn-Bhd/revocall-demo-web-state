@@ -1,15 +1,14 @@
 import { type Node, type Edge } from "@xyflow/react";
 import { FiFile } from "react-icons/fi";
-import { FaQuestionCircle } from "react-icons/fa";
 import {
-  MdOutlineAppRegistration,
-  MdOutlineDriveFileRenameOutline,
-  MdPermIdentity,
-  MdOutlineWork,
-  MdCallEnd,
-} from "react-icons/md";
+  FaQuestionCircle,
+  FaBirthdayCake,
+  FaRegCreditCard,
+} from "react-icons/fa";
+import { AiOutlineTransaction } from "react-icons/ai";
+import { TbLock } from "react-icons/tb";
+import { MdPermIdentity, MdCallEnd } from "react-icons/md";
 import { BiSolidPhoneCall } from "react-icons/bi";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { IoMdCloudUpload } from "react-icons/io";
 import TurboNode, { type TurboNodeData } from "./TurboNode.tsx";
 import TurboEdge from "./TurboEdge.tsx";
@@ -39,17 +38,17 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "group_1",
     position: { x: 200, y: 100 },
-    data: { label: "Card Registration" },
+    data: { label: "Card Loss Application" },
     width: 500,
-    height: 800,
+    height: 900,
     type: "group",
   },
   {
     id: "2",
     position: { x: 100, y: 50 },
     data: {
-      icon: <MdOutlineAppRegistration />,
-      title: "Requesting Card Registration",
+      icon: <MdPermIdentity />,
+      title: "Collect IC Number",
       nodeTB: true,
     },
     type: "turbo",
@@ -60,8 +59,8 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "3",
     position: { x: 100, y: 150 },
     data: {
-      icon: <MdOutlineDriveFileRenameOutline />,
-      title: "Request Name",
+      icon: <FaBirthdayCake />,
+      title: "Collect Date of Birth",
       nodeTB: true,
     },
     type: "turbo",
@@ -72,8 +71,8 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "4",
     position: { x: 100, y: 250 },
     data: {
-      icon: <MdPermIdentity />,
-      title: "Request IC No.",
+      icon: <AiOutlineTransaction />,
+      title: "Collect Last Transaction",
       nodeTB: true,
     },
     type: "turbo",
@@ -84,8 +83,8 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "5",
     position: { x: 100, y: 350 },
     data: {
-      icon: <MdOutlineWork />,
-      title: "Request Employment Status",
+      icon: <FaRegCreditCard />,
+      title: "Confirm Lost Card",
       nodeTB: true,
     },
     type: "turbo",
@@ -96,8 +95,8 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "6",
     position: { x: 100, y: 450 },
     data: {
-      icon: <RiMoneyDollarCircleFill />,
-      title: "Request Annual Income",
+      icon: <TbLock />,
+      title: "Confirm Block Card",
       nodeTB: true,
     },
     type: "turbo",
@@ -109,7 +108,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     position: { x: 100, y: 550 },
     data: {
       icon: <FiFile />,
-      title: "Confirming Application",
+      title: "New Card Registration",
       nodeTB: true,
     },
     type: "turbo",
@@ -120,8 +119,8 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "8",
     position: { x: 100, y: 650 },
     data: {
-      icon: <IoMdCloudUpload />,
-      title: "Application Submitted",
+      icon: <MdPermIdentity />,
+      title: "Collect Postal Code",
       nodeTB: true,
     },
     type: "turbo",
@@ -130,7 +129,19 @@ export const initialNodes: Node<TurboNodeData>[] = [
   },
   {
     id: "9",
-    position: { x: 750, y: 800 },
+    position: { x: 100, y: 750 },
+    data: {
+      icon: <IoMdCloudUpload />,
+      title: "Submit New Card",
+      nodeTB: true,
+    },
+    type: "turbo",
+    parentId: "group_1",
+    extent: "parent",
+  },
+  {
+    id: "10",
+    position: { x: 750, y: 900 },
     data: {
       icon: <MdCallEnd />,
       title: "Call Ended",
@@ -193,9 +204,14 @@ export const initialEdges: Edge[] = [
     target: "9",
   },
   {
-    id: "e1-9", // FAQ -> Call Ended
+    id: "e9-10",
+    source: "9",
+    target: "10",
+  },
+  {
+    id: "e1-10", // FAQ -> Call Ended
     source: "1",
-    target: "9",
+    target: "10",
     animated: true,
   },
 ];
