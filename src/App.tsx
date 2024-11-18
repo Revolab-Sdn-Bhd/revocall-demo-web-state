@@ -22,9 +22,7 @@ const channelName = "test";
 const completed = new Set<number>();
 
 // TODO:
-// - Change the block to primary color
 // - Add api loading indicator
-// - Add revocall header
 
 const Flow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -114,9 +112,47 @@ const Flow = () => {
           </marker>
         </defs>
       </svg>
+      {header()}
     </ReactFlow>
   );
 };
+
+function header() {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: 10,
+        left: 10,
+        color: "black",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <img
+          src="./logo_with_text.png"
+          alt="revocall_logo"
+          style={{ height: "75px" }}
+        />
+        <h1
+          style={{
+            fontSize: "28px",
+            marginBottom: "10px",
+            marginLeft: "20px",
+            fontWeight: "bold",
+          }}
+        >
+          Card Loss Demo
+        </h1>
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   return (

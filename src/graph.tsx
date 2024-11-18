@@ -13,6 +13,7 @@ import { IoMdCloudUpload } from "react-icons/io";
 import TurboNode, { type TurboNodeData } from "./TurboNode.tsx";
 import TurboEdge from "./TurboEdge.tsx";
 import { LabeledGroupNode } from "./components/labeled-group-node";
+import { AnnotationNode } from "@/components/annotation-node";
 
 export const initialNodes: Node<TurboNodeData>[] = [
   {
@@ -219,6 +220,7 @@ export const initialEdges: Edge[] = [
 export const nodeTypes = {
   turbo: TurboNode,
   group: LabeledGroupNode,
+  annotationNode: AnnotationNode,
 };
 
 export const edgeTypes = {

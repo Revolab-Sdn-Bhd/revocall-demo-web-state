@@ -17,6 +17,14 @@ export type TurboNodeData = {
   nodeRB?: boolean;
   nodeBR?: boolean;
   nodeTR?: boolean;
+  // For annotation nodes
+  level?: number;
+  arrow?: string;
+  arrowStyle?: {
+    right: number;
+    bottom: number;
+    transform: string;
+  };
 };
 
 const incomplete = {
@@ -59,7 +67,9 @@ const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
         </div>
       )}
       <div
-        className={`wrapper ${data.status !== "incomplete" ? "gradient" : ""} ${data.status}`}
+        className={`wrapper ${data.status !== "incomplete" ? "gradient" : ""} ${
+          data.status
+        }`}
         style={nodeStyle}
       >
         <div className="inner" style={colors}>
