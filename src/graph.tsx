@@ -1,8 +1,18 @@
 import { type Node, type Edge } from "@xyflow/react";
 import { FiFile } from "react-icons/fi";
+import { FaQuestionCircle } from "react-icons/fa";
+import {
+  MdOutlineAppRegistration,
+  MdOutlineDriveFileRenameOutline,
+  MdPermIdentity,
+  MdOutlineWork,
+  MdCallEnd,
+} from "react-icons/md";
+import { BiSolidPhoneCall } from "react-icons/bi";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { IoMdCloudUpload } from "react-icons/io";
 import TurboNode, { type TurboNodeData } from "./TurboNode.tsx";
 import TurboEdge from "./TurboEdge.tsx";
-import FunctionIcon from "./FunctionIcon.tsx";
 import { LabeledGroupNode } from "./components/labeled-group-node";
 
 export const initialNodes: Node<TurboNodeData>[] = [
@@ -10,10 +20,12 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "0",
     position: { x: 0, y: 0 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <BiSolidPhoneCall />,
       title: "Call Initialized",
       subline: "api.ts",
       nodeLR: true,
+      color: "#000",
+      backgroundColor: "#F9F9F9",
     },
     type: "turbo",
   },
@@ -21,7 +33,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "1",
     position: { x: 500, y: 0 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <FaQuestionCircle />,
       title: "FAQ",
       subline: "api.ts",
       nodeLB: true,
@@ -40,7 +52,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "2",
     position: { x: 100, y: 50 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <MdOutlineAppRegistration />,
       title: "Requesting Card Registration",
       subline: "apiContents",
       nodeTB: true,
@@ -53,7 +65,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "3",
     position: { x: 100, y: 150 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <MdOutlineDriveFileRenameOutline />,
       title: "Request Name",
       subline: "sdk.ts",
       nodeTB: true,
@@ -66,7 +78,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "4",
     position: { x: 100, y: 250 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <MdPermIdentity />,
       title: "Request IC No.",
       subline: "sdkContents",
       nodeTB: true,
@@ -79,7 +91,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     id: "5",
     position: { x: 100, y: 350 },
     data: {
-      icon: <FunctionIcon />,
+      icon: <MdOutlineWork />,
       title: "Request Employment Status",
       subline: "api, sdk",
       nodeTB: true,
@@ -91,7 +103,11 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "6",
     position: { x: 100, y: 450 },
-    data: { icon: <FiFile />, title: "Request Annual Income", nodeTB: true },
+    data: {
+      icon: <RiMoneyDollarCircleFill />,
+      title: "Request Annual Income",
+      nodeTB: true,
+    },
     type: "turbo",
     parentId: "group_1",
     extent: "parent",
@@ -107,7 +123,11 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "8",
     position: { x: 100, y: 650 },
-    data: { icon: <FiFile />, title: "Application Submitted", nodeTB: true },
+    data: {
+      icon: <IoMdCloudUpload />,
+      title: "Application Submitted",
+      nodeTB: true,
+    },
     type: "turbo",
     parentId: "group_1",
     extent: "parent",
@@ -115,7 +135,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "9",
     position: { x: 750, y: 800 },
-    data: { icon: <FiFile />, title: "Call Ended", nodeLR: true },
+    data: { icon: <MdCallEnd />, title: "Call Ended", nodeLR: true },
     type: "turbo",
   },
 ];

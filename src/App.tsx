@@ -5,14 +5,17 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
-  type Node,
-  type Edge,
   type OnConnect,
 } from "@xyflow/react";
-import { nodeTypes, edgeTypes, defaultEdgeOptions, initialNodes, initialEdges } from "./graph.tsx";
+import {
+  nodeTypes,
+  edgeTypes,
+  defaultEdgeOptions,
+  initialNodes,
+  initialEdges,
+} from "./graph.tsx";
+
 import "@xyflow/react/dist/base.css";
-
-
 
 const Flow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);

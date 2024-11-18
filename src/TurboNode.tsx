@@ -8,6 +8,8 @@ export type TurboNodeData = {
   icon?: ReactNode;
   label?: string;
   subline?: string;
+  backgroundColor?: string;
+  color?: string;
   nodeLR?: boolean;
   nodeRL?: boolean;
   nodeTB?: boolean;
@@ -29,7 +31,7 @@ const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
         </div>
       </div>
       <div className="wrapper gradient" style={minWidthStyle}>
-        <div className="inner">
+        <div className="inner" style={{ backgroundColor: data.backgroundColor, color: data.color }}>
           <div className="body">
             {data.icon && <div className="icon">{data.icon}</div>}
             <div>
