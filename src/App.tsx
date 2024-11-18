@@ -14,12 +14,17 @@ import {
   initialNodes,
   initialEdges,
 } from "./graph.tsx";
+import { useChannel } from "ably/react";
 
 import "@xyflow/react/dist/base.css";
 
 const Flow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  const channel = useChannel("test", (message) => {
+    console.log("Received message", message);
+  });
 
   const onConnect: OnConnect = useCallback(
     (params) => setEdges((els) => addEdge(params, els)),
