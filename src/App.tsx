@@ -6,6 +6,7 @@ import {
   useEdgesState,
   addEdge,
   type OnConnect,
+  type Node,
 } from "@xyflow/react";
 import {
   nodeTypes,
@@ -14,6 +15,7 @@ import {
   initialNodes,
   initialEdges,
 } from "./graph.tsx";
+import { type TurboNodeData } from "./TurboNode.tsx";
 import { useChannel, ChannelProvider } from "ably/react";
 
 import "@xyflow/react/dist/base.css";
@@ -28,55 +30,73 @@ const Flow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const { channel } = useChannel(channelName, (message) => {
+  const { channel } = useChannel(channelName, (event) => {
     // Handle incoming conversations state messages
-    if (message.name === "state") {
-      const { event, message: msg } = message.data;
-      const [id, state] = event.split(" - ");
+    if (event.name === "state") {
+      const { event: type, data } = event.data;
+      const [id, state] = type.split(" - ");
 
-      console.log("Received state message", state);
+      console.log(`Received state message: ${type} - ${JSON.stringify(data)}`);
 
-      const idx = nodes.findIndex((node) => {
-        if (node.id === id) return true;
-      });
+      processState(id, data);
+    }
 
-      // If the node is not found, return
-      if (idx === -1) return;
-
-      // Update the node
-      setNodes((nodes) => {
-        const newNodes = [...nodes];
-
-        completed.forEach((completedIdx) => {
-          newNodes[completedIdx] = {
-            ...newNodes[completedIdx],
-            data: {
-              ...newNodes[completedIdx].data,
-              status: "completed",
-            },
-          };
-        });
-
-        newNodes[idx] = {
-          ...newNodes[idx],
-          data: {
-            ...newNodes[idx].data,
-            status: "current",
-            subline: msg,
-          },
-        };
-
-        return newNodes;
-      });
-
-      completed.add(idx);
+    if (event.name === "process") {
     }
   });
+
+  const processState = (id: string, data: Record<string, unknown>) => {
+    const idx = nodes.findIndex((node) => {
+      if (node.id === id) return true;
+    });
+
+    // If the node is not found, return
+    if (idx === -1) return;
+
+    // Update the node
+    setNodes((nodes) => {
+      const newNodes = [...nodes];
+
+      completed.forEach((completedIdx) => {
+        const node = deepCloneNode(newNodes[completedIdx]);
+        node.data.status = "completed";
+        newNodes[completedIdx] = node;
+      });
+
+      const current_node = deepCloneNode(newNodes[idx]);
+      current_node.data.status = "current";
+
+      if (current_node.data.slot) {
+        const slotValues: string[] = [];
+
+        current_node.data.slot.forEach((slot) => {
+          console.log(`Slot[${slot}]: ${data[slot]}`);
+          slotValues.push(data[slot]?.toString() ?? "");
+        });
+
+        current_node.data.subline = slotValues.join(", ");
+      }
+      newNodes[idx] = current_node;
+
+      return newNodes;
+    });
+
+    completed.add(idx);
+  };
+
+  const handleProcess = (id: string, data: Record<string, unknown>) => {}
 
   const onConnect: OnConnect = useCallback(
     (params) => setEdges((els) => addEdge(params, els)),
     []
   );
+
+  const deepCloneNode = (node: Node<TurboNodeData>) => {
+    return {
+      ...node,
+      data: { ...node.data },
+    };
+  };
 
   return (
     <ReactFlow
@@ -158,7 +178,7 @@ export default function App() {
   return (
     <ChannelProvider
       channelName={channelName}
-      options={{ params: { rewind: "10" } }}
+      options={{ params: { rewind: "0" } }}
     >
       <Flow />
     </ChannelProvider>

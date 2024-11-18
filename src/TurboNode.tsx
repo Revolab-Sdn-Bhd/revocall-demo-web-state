@@ -9,6 +9,7 @@ export type TurboNodeData = {
   label?: string;
   subline?: string;
   status?: string;
+  slot? : string[];
   nodeLR?: boolean;
   nodeRL?: boolean;
   nodeTB?: boolean;

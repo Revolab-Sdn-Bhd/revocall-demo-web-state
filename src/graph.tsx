@@ -32,6 +32,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <FaQuestionCircle />,
       title: "FAQ",
+      slot: ["question"],
       nodeLB: true,
     },
     type: "turbo",
@@ -50,6 +51,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdPermIdentity />,
       title: "Collect IC Number",
+      slot: ["ic_number"],
       nodeTB: true,
     },
     type: "turbo",
@@ -62,6 +64,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <FaBirthdayCake />,
       title: "Collect Date of Birth",
+      slot: ["dob"],
       nodeTB: true,
     },
     type: "turbo",
@@ -74,6 +77,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <AiOutlineTransaction />,
       title: "Collect Last Transaction",
+      slot: ["last_transaction_amount", "last_transaction_merchant"],
       nodeTB: true,
     },
     type: "turbo",
@@ -122,6 +126,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdPermIdentity />,
       title: "Collect Postal Code",
+      slot: ["postal_code"],
       nodeTB: true,
     },
     type: "turbo",
