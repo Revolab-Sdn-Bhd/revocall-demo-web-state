@@ -22,10 +22,13 @@ import { toast } from "sonner";
 
 const getChannelNameFromURL = () => {
   const path = window.location.pathname;
-  return path.split("/")[1] || "default";
+  const params = new URLSearchParams(window.location.search);
+
+  return params.get("channel") || path.split("/")[1] || "default";
 };
 
 const channelName = getChannelNameFromURL();
+console.log(`Channel name: ${channelName}`);
 const completed = new Set<number>();
 
 // TODO:
