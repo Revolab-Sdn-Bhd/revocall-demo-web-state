@@ -22,10 +22,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <BiSolidPhoneCall />,
       title: "Call Initialized",
-      subline: "api.ts",
       nodeLR: true,
-      color: "#000",
-      backgroundColor: "#F9F9F9",
     },
     type: "turbo",
   },
@@ -35,7 +32,6 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <FaQuestionCircle />,
       title: "FAQ",
-      subline: "api.ts",
       nodeLB: true,
     },
     type: "turbo",
@@ -54,7 +50,6 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdOutlineAppRegistration />,
       title: "Requesting Card Registration",
-      subline: "apiContents",
       nodeTB: true,
     },
     type: "turbo",
@@ -67,7 +62,6 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdOutlineDriveFileRenameOutline />,
       title: "Request Name",
-      subline: "sdk.ts",
       nodeTB: true,
     },
     type: "turbo",
@@ -80,7 +74,6 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdPermIdentity />,
       title: "Request IC No.",
-      subline: "sdkContents",
       nodeTB: true,
     },
     type: "turbo",
@@ -93,7 +86,6 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <MdOutlineWork />,
       title: "Request Employment Status",
-      subline: "api, sdk",
       nodeTB: true,
     },
     type: "turbo",
@@ -115,7 +107,11 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "7",
     position: { x: 100, y: 550 },
-    data: { icon: <FiFile />, title: "Confirming Application", nodeTB: true },
+    data: {
+      icon: <FiFile />,
+      title: "Confirming Application",
+      nodeTB: true,
+    },
     type: "turbo",
     parentId: "group_1",
     extent: "parent",
@@ -135,7 +131,11 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "9",
     position: { x: 750, y: 800 },
-    data: { icon: <MdCallEnd />, title: "Call Ended", nodeLR: true },
+    data: {
+      icon: <MdCallEnd />,
+      title: "Call Ended",
+      nodeLR: true,
+    },
     type: "turbo",
   },
 ];

@@ -1,5 +1,5 @@
 import React, { memo, type ReactNode } from "react";
-import { FiCloud } from "react-icons/fi";
+import { MdFileDownloadDone } from "react-icons/md";
 
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
 
@@ -8,8 +8,7 @@ export type TurboNodeData = {
   icon?: ReactNode;
   label?: string;
   subline?: string;
-  backgroundColor?: string;
-  color?: string;
+  status?: string;
   nodeLR?: boolean;
   nodeRL?: boolean;
   nodeTB?: boolean;
@@ -20,18 +19,50 @@ export type TurboNodeData = {
   nodeTR?: boolean;
 };
 
+const incomplete = {
+  color: "#AAAAAA",
+  backgroundColor: "#E5E5E5",
+};
+
+const current = {
+  color: "#000000",
+  backgroundColor: "#F9F9F9",
+};
+
+const completed = {
+  color: undefined,
+  backgroundColor: "#1C2740",
+};
+
 const TurboNode: React.FC<NodeProps<Node<TurboNodeData>>> = ({ data }) => {
-  const minWidthStyle = { minWidth: "300px" }; // Set your desired minimum width
+  const nodeStyle = { minWidth: "300px", border: "" }; // Set your desired minimum width
+
+  let colors: { color: string | undefined; backgroundColor: string };
+
+  if (data.status === "current") {
+    colors = current;
+  } else if (data.status === "completed") {
+    colors = completed;
+  } else {
+    colors = incomplete;
+    data.status = "incomplete";
+    nodeStyle.border = "2px solid #AAAAAA";
+  }
 
   return (
     <>
-      <div className="cloud gradient">
-        <div>
-          <FiCloud />
+      {data.status === "completed" && (
+        <div className="cloud gradient">
+          <div>
+            <MdFileDownloadDone />
+          </div>
         </div>
-      </div>
-      <div className="wrapper gradient" style={minWidthStyle}>
-        <div className="inner" style={{ backgroundColor: data.backgroundColor, color: data.color }}>
+      )}
+      <div
+        className={`wrapper ${data.status !== "incomplete" ? "gradient" : ""} ${data.status}`}
+        style={nodeStyle}
+      >
+        <div className="inner" style={colors}>
           <div className="body">
             {data.icon && <div className="icon">{data.icon}</div>}
             <div>
