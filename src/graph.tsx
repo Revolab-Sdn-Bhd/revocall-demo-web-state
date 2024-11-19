@@ -23,6 +23,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     data: {
       icon: <BiSolidPhoneCall />,
       title: "Call Initialized",
+      slot: ["phone_number"],
       nodeLR: true,
     },
     type: "turbo",
