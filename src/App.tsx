@@ -61,7 +61,7 @@ const Flow = () => {
 
       for (const key in data) {
         chunks.push(
-          `${key.split("_").join(" ")}: ${data[key] ? "success" : "failure"}`
+          `${key.split("_").join(" ")}: ${data[key]}`
         );
       }
 
