@@ -197,7 +197,7 @@ function header() {
             fontWeight: "bold",
           }}
         >
-          Card Loss Demo
+          Card Lost Demo
         </h1>
       </div>
     </div>
@@ -208,7 +208,7 @@ export default function App() {
   return (
     <ChannelProvider
       channelName={channelName}
-      options={{ params: { rewind: "0" } }}
+      options={{ params: { rewind: "10" } }}
     >
       <Flow />
     </ChannelProvider>

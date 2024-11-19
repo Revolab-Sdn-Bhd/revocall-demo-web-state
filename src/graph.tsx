@@ -41,7 +41,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
   {
     id: "group_1",
     position: { x: 200, y: 100 },
-    data: { label: "Card Loss Application" },
+    data: { label: "Card Lost Application" },
     width: 500,
     height: 1000,
     type: "group",
