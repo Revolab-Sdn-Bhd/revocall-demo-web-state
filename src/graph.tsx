@@ -127,7 +127,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     position: { x: 100, y: 650 },
     data: {
       icon: <FiFile />,
-      title: "New Card Registration",
+      title: "Reissue New Card",
       nodeTB: true,
     },
     type: "turbo",
@@ -152,7 +152,7 @@ export const initialNodes: Node<TurboNodeData>[] = [
     position: { x: 100, y: 850 },
     data: {
       icon: <IoMdCloudUpload />,
-      title: "Submit New Card",
+      title: "Submit Application",
       nodeTB: true,
     },
     type: "turbo",
